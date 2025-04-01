@@ -1,0 +1,281 @@
+:root {
+    --bg-color: #f4f4f4;
+    --container-bg: #fff;
+    --text-color: #333;
+    --secondary-text-color: #777;
+    --border-color: #ddd;
+    --input-border-color: #ccc;
+    --button-bg: #007bff;
+    --button-text: white;
+    --button-hover-bg: #0056b3;
+    --entry-bg: #fff;
+    --entry-border: #eee;
+    --log-bg: #f9f9f9;
+    --category-bg: #e9ecef;
+    --category-text: #495057;
+    --delete-bg: #dc3545;
+    --delete-hover-bg: #c82333;
+    --export-bg: #28a745;
+    --export-hover-bg: #218838;
+    --theme-toggle-bg: #6c757d;
+    --theme-toggle-hover-bg: #5a6268;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    min-height: 100vh;
+}
+
+.container {
+    position: relative; /* Needed for absolute positioning of theme button */
+    background-color: var(--container-bg);
+    padding: 15px;
+    padding-top: 50px; /* Add padding top for theme button */
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 600px; /* Limit width on larger screens */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 20px); /* Adjust height considering margin */
+}
+
+.theme-toggle-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: var(--theme-toggle-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.theme-toggle-button:hover {
+    background-color: var(--theme-toggle-hover-bg);
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 10px; /* Reduce margin slightly */
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    font-size: 0.9em;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    background-color: var(--container-bg); /* Match container */
+    color: var(--text-color); /* Match text */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.log-entries {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--log-bg); /* Use variable */
+    transition: background-color 0.3s, border-color 0.3s;
+    margin-bottom: 10px;
+    /* background-color: var(--log-bg); // Already set on line 82 */
+    padding: 10px;
+    /* background-color: #f9f9f9; // Removed hardcoded value */
+}
+
+.log-entry {
+    background-color: var(--entry-bg);
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--entry-border); /* Use variable */
+    transition: background-color 0.3s, border-color 0.3s;
+    /* border-radius and border moved up */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px; /* Add some space between elements */
+}
+
+.log-category {
+    font-size: 0.75em;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--category-bg);
+    color: var(--category-text); /* Use variable */
+    transition: background-color 0.3s, color 0.3s;
+    /* color moved up */
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.log-text {
+    flex-grow: 1;
+    margin-right: 10px; /* Keep margin for spacing */
+    /* margin-right: 10px; // Removed duplicate */
+    word-break: break-word; /* Wrap long text */
+}
+
+.log-timestamp {
+    display: block; /* Make timestamp appear below text */
+    font-size: 0.8em;
+    color: var(--secondary-text-color); /* Use variable */
+    /* color moved up */
+    white-space: nowrap; /* Prevent timestamp from wrapping */
+}
+
+.input-area {
+    display: flex;
+    gap: 5px; /* Add space between select, input, and button */
+    margin-top: auto; /* Push input to the bottom */
+}
+
+#category-select {
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: var(--container-bg); /* Match container */
+    color: var(--text-color); /* Match text */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    /* background-color moved up */
+    flex-shrink: 0; /* Prevent select from shrinking too much */
+}
+
+#log-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    background-color: var(--container-bg); /* Match container */
+    color: var(--text-color); /* Match text */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-size: 1em;
+}
+
+#add-button {
+    padding: 10px 15px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    transition: background-color 0.3s;
+    border-radius: 4px; /* Adjust radius as it's no longer last */
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#add-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.export-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: var(--export-bg);
+    color: var(--button-text);
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box;
+}
+
+.export-button:hover {
+    background-color: var(--export-hover-bg);
+}
+
+.import-button {
+    margin-top: 5px; /* Add some space below export */
+    padding: 10px 15px;
+    background-color: var(--theme-toggle-bg); /* Use secondary color */
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+}
+
+.import-button:hover {
+    background-color: var(--theme-toggle-hover-bg);
+}
+
+.delete-button {
+    background-color: var(--delete-bg);
+    color: var(--button-text);
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    width: 24px;
+    height: 24px;
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    line-height: 24px; /* Center the 'X' */
+    text-align: center;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.delete-button:hover {
+    background-color: var(--delete-hover-bg);
+    /* background-color: #218838; // Removed incorrect hardcoded value */
+}
+
+
+/* Basic responsiveness for slightly larger screens if needed */
+@media (min-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Dark Theme */
+body.dark-theme {
+    --bg-color: #22272e;
+    --container-bg: #2d333b;
+    --text-color: #cdd9e5;
+    --secondary-text-color: #768390;
+    --border-color: #444c56;
+    --input-border-color: #545d68;
+    --button-bg: #377dff;
+    --button-hover-bg: #4c8eff;
+    --entry-bg: #323840;
+    --entry-border: #444c56;
+    --log-bg: #272c34;
+    --category-bg: #444c56;
+    --category-text: #cdd9e5;
+    --delete-bg: #e5534b;
+    --delete-hover-bg: #f9756d;
+    --export-bg: #347d39;
+    --export-hover-bg: #46954a;
+    --theme-toggle-bg: #768390;
+    --theme-toggle-hover-bg: #8b949e;
+}
+
+/* Adjust box-shadow for dark theme */
+body.dark-theme .container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}

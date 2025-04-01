@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Log</title>
+    <link rel="icon" href="fevicon-medicallogjournal.jpg" type="image/jpeg"> <!-- Standard Favicon -->
+    <link rel="apple-touch-icon" href="fevicon-medicallogjournal.jpg"> <!-- Apple Touch Icon -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="theme-toggle" class="theme-toggle-button">Toggle Theme</button>
+        <h1>Activity Log</h1>
+        <input type="text" id="search-input" class="search-input" placeholder="Search entries...">
+        <div id="log-entries" class="log-entries">
+            <!-- Log entries will be loaded here -->
+        </div>
+        <div class="input-area">
+            <select id="category-select">
+                <option value="all">All Categories</option> <!-- Filter Option -->
+                <option value="Air" selected>Air</option> <!-- Default Selection -->
+                <option value="Temperature">Temperature</option>
+                <option value="Pressure">Pressure</option>
+                <option value="Medications">Medications</option>
+                <option value="Symptoms">Symptoms</option>
+                <option value="Procedures">Procedures</option>
+                <option value="">No Category</option> <!-- Option for adding without category -->
+            </select>
+            <input type="text" id="log-input" placeholder="Enter activity or number...">
+            <button id="add-button">Add</button>
+        </div>
+        <button id="export-button" class="export-button">Export to JSON</button>
+        <input type="file" id="import-file" accept=".json" style="display: none;"> <!-- Hidden file input -->
+        <button id="import-button" class="import-button">Import from JSON</button> <!-- Visible button -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
