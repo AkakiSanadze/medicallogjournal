@@ -47,8 +47,8 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    /* Remove fixed height to allow natural content flow */
-    padding-bottom: 20px; /* Add padding at the bottom for spacing */
+    height: calc(100vh - 20px); /* Restore fixed height */
+    /* Remove bottom padding, height constraint handles spacing */
 }
 
 .theme-toggle-button {
@@ -145,8 +145,9 @@ h1 {
 
 .input-area {
     display: flex;
-    gap: 8px; /* Increase gap slightly for better mobile spacing */
-    margin-top: auto; /* Push input to the bottom */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 8px;
+    margin-top: auto; /* Push input area to the bottom */
 }
 
 #category-select {
@@ -158,11 +159,13 @@ h1 {
     color: var(--text-color); /* Match text */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     /* background-color moved up */
-    flex-shrink: 0; /* Prevent select from shrinking too much */
+    flex-basis: 120px; /* Give select a base width, but allow shrinking */
+    flex-grow: 1; /* Allow select to grow slightly if needed */
 }
 
 #log-input {
-    flex-grow: 1;
+    flex-grow: 2; /* Allow text input to take more space than select */
+    flex-basis: 150px; /* Give text input a larger base width */
     padding: 10px;
     border: 1px solid var(--input-border-color);
     border-radius: 4px;
@@ -178,9 +181,12 @@ h1 {
     color: var(--button-text);
     border: none;
     transition: background-color 0.3s;
-    border-radius: 4px; /* Adjust radius as it's no longer last */
+    border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
+    width: 100%; /* Make Add button full width */
+    box-sizing: border-box; /* Include padding/border in width */
+    margin-top: 5px; /* Add small margin above the full-width button */
 }
 
 #add-button:hover {
