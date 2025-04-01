@@ -47,7 +47,8 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 20px); /* Adjust height considering margin */
+    /* Remove fixed height to allow natural content flow */
+    padding-bottom: 20px; /* Add padding at the bottom for spacing */
 }
 
 .theme-toggle-button {
@@ -144,7 +145,7 @@ h1 {
 
 .input-area {
     display: flex;
-    gap: 5px; /* Add space between select, input, and button */
+    gap: 8px; /* Increase gap slightly for better mobile spacing */
     margin-top: auto; /* Push input to the bottom */
 }
 
@@ -172,7 +173,7 @@ h1 {
 }
 
 #add-button {
-    padding: 10px 15px;
+    padding: 11px 15px; /* Slightly increase padding */
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;
@@ -187,8 +188,8 @@ h1 {
 }
 
 .export-button {
-    margin-top: 10px;
-    padding: 10px 15px;
+    margin-top: 8px; /* Reduce margin */
+    padding: 11px 15px; /* Slightly increase padding */
     background-color: var(--export-bg);
     color: var(--button-text);
     transition: background-color 0.3s;
@@ -205,8 +206,8 @@ h1 {
 }
 
 .import-button {
-    margin-top: 5px; /* Add some space below export */
-    padding: 10px 15px;
+    margin-top: 8px; /* Match export button margin */
+    padding: 11px 15px; /* Slightly increase padding */
     background-color: var(--theme-toggle-bg); /* Use secondary color */
     color: var(--button-text);
     border: none;
