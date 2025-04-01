@@ -63,15 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.push(entry);
         saveEntries(entries);
 
-        // Display the new entry
-        displayEntry(entry);
+        // Refresh the display to include the new entry at the top
+        filterEntries();
 
         // Clear the input field
         logInput.value = '';
         categorySelect.value = 'Air'; // Reset category dropdown to default 'Air'
 
-        // Scroll to the bottom of the log container
-        logEntriesContainer.scrollTop = logEntriesContainer.scrollHeight;
+        // No need to scroll, new entry appears at the top
     } // End of addEntry function
 
     // Export entries on export button click
@@ -150,16 +149,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function deleteEntry(timestamp) {
-        // Remove from DOM
-        const entryDiv = logEntriesContainer.querySelector(`[data-timestamp="${timestamp}"]`);
-        if (entryDiv) {
-            entryDiv.remove();
-        }
+        // Confirm before deleting
+        const confirmDelete = confirm("Are you sure you want to delete this entry?");
+        if (confirmDelete) {
+            // Remove from DOM
+            const entryDiv = logEntriesContainer.querySelector(`[data-timestamp="${timestamp}"]`);
+            if (entryDiv) {
+                entryDiv.remove();
+            }
 
-        // Remove from localStorage
-        let entries = getEntries();
-        entries = entries.filter(entry => entry.timestamp !== timestamp);
-        saveEntries(entries);
+            // Remove from localStorage
+            let entries = getEntries();
+            entries = entries.filter(entry => entry.timestamp !== timestamp);
+            saveEntries(entries);
+        }
     }
 
     function loadEntries() {
@@ -172,7 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const entries = getEntries();
         logEntriesContainer.innerHTML = ''; // Clear existing display
 
-        entries.forEach(entry => {
+        // Reverse the entries to display newest first
+        const reversedEntries = entries.slice().reverse();
+        reversedEntries.forEach(entry => {
             const entryCategory = entry.category || ""; // Treat undefined/null category as empty string
             const entryText = entry.text.toLowerCase();
 
@@ -187,8 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayEntry(entry);
             }
         });
-        // Scroll to the bottom after filtering/loading
-        logEntriesContainer.scrollTop = logEntriesContainer.scrollHeight;
+        // Scroll to the top after filtering/loading
+        logEntriesContainer.scrollTop = 0;
     }
 
     function getEntries() {
